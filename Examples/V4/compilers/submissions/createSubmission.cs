@@ -20,12 +20,11 @@ namespace csharpexamples {
 
 				// define request parameters
 				NameValueCollection formData = new NameValueCollection ();
-				formData.Add("problemCode", "EXAMPLE");
 				formData.Add("source", "<source_code>");
 				formData.Add("compilerId", "11");
 
 				// send request
-				byte[] responseBytes = client.UploadValues ("http://" + endpoint + "/api/v3/submissions?access_token=" + accessToken, "POST", formData);
+				byte[] responseBytes = client.UploadValues("http://" + endpoint + "/api/v4/submissions?access_token=" + accessToken, "POST", formData);
 				string responseBody = Encoding.UTF8.GetString(responseBytes);
 
 				// process response
@@ -38,15 +37,11 @@ namespace csharpexamples {
 				// fetch errors
 				if (statusCode == HttpStatusCode.Unauthorized) {
 					Console.WriteLine("Invalid access token");
-				}
-				if (statusCode == HttpStatusCode.BadRequest) {
-					Console.WriteLine("Empty source code");
-				}
-				if (statusCode == HttpStatusCode.Forbidden) {
-					Console.WriteLine("Compiler not available");
-				}
-				if (statusCode == HttpStatusCode.NotFound) {
-					Console.WriteLine("Problem, compiler or user not found");
+				} else if(statusCode == HttpStatusCode.PaymentRequired) {
+					Console.WriteLine("Unable to create submission");
+				} else if(statusCode == HttpStatusCode.BadRequest) {
+					StreamReader reader = new StreamReader(response.GetResponseStream(), Encoding.UTF8);
+					Console.WriteLine(reader.ReadToEnd());
 				}
 
 				response.Close();
