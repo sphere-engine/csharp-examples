@@ -20,7 +20,7 @@ namespace csharpexamples {
 
 				// define request parameters
 				NameValueCollection formData = new NameValueCollection ();
-				formData.Add("problemCode", "EXAMPLE");
+				formData.Add("problemId", "42");
 				formData.Add("source", "<source_code>");
 				formData.Add("compilerId", "11");
 
