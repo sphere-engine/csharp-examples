@@ -22,7 +22,7 @@ namespace csharpexamples {
 				WebClient client = new WebClient();
 
 				// send request
-				byte[] responseBytes = client.DownloadData("http://" + endpoint + "/api/v3/submissions/" + submissionId + "?access_token=" + accessToken);
+				byte[] responseBytes = client.DownloadData("https://" + endpoint + "/api/v3/submissions/" + submissionId + "?access_token=" + accessToken);
 				string responseBody = Encoding.UTF8.GetString(responseBytes);
 
 				// process response

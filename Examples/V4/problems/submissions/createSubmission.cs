@@ -25,7 +25,7 @@ namespace csharpexamples {
 				formData.Add("compilerId", "11");
 
 				// send request
-				byte[] responseBytes = client.UploadValues ("http://" + endpoint + "/api/v4/submissions?access_token=" + accessToken, "POST", formData);
+				byte[] responseBytes = client.UploadValues ("https://" + endpoint + "/api/v4/submissions?access_token=" + accessToken, "POST", formData);
 				string responseBody = Encoding.UTF8.GetString(responseBytes);
 
 				// process response
